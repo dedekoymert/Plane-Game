@@ -85,5 +85,11 @@ public class PlayerController : MonoBehaviour
 	public void ChangeOriginalPlane() {
 		GetComponent<Renderer>().material.color = initialColor;
 	}
+
+	public void OnCollisionEnter(Collision other) {
+		Debug.Log("Collision with " + other.gameObject.name);
+		ApplicationModel.status = 2;
+        UnityEngine.SceneManagement.SceneManager.LoadScene("SampleScene");
+	}
 	
 }
