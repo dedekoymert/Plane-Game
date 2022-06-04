@@ -13,9 +13,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float positionYawFactor = 2f;
     [SerializeField] float controlRollFactor = -20f;
 
-	// private Rigidbody rb;
     float xThrow, yThrow;
-
+	
 	Color initialColor;
 
 	void Start() {
@@ -87,9 +86,22 @@ public class PlayerController : MonoBehaviour
 	}
 
 	public void OnCollisionEnter(Collision other) {
-		Debug.Log("Collision with " + other.gameObject.name);
-		ApplicationModel.status = 2;
-        UnityEngine.SceneManagement.SceneManager.LoadScene("SampleScene");
+		if(ApplicationModel.status != 3) {
+			return;
+		}
+		if (other.gameObject.name == "finishline") {
+			if (ApplicationModel.score == 15) {
+				ApplicationModel.status = 1;
+			} else {
+				ApplicationModel.status = 2;
+			}
+			ApplicationModel.score = 0;
+			UnityEngine.SceneManagement.SceneManager.LoadScene("SampleScene");
+		} else {
+			ApplicationModel.status = 2;
+			ApplicationModel.score = 0;
+			UnityEngine.SceneManagement.SceneManager.LoadScene("SampleScene");
+		}
 	}
 	
 }

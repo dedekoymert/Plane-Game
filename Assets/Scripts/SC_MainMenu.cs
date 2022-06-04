@@ -8,8 +8,6 @@ public class SC_MainMenu : MonoBehaviour
     public GameObject WinMenu;
     public GameObject LostMenu;
 
-
-    // Start is called before the first frame update
     void Start()
     {
         if(ApplicationModel.status == 0) {
@@ -30,10 +28,8 @@ public class SC_MainMenu : MonoBehaviour
 
     public void PlayNowButton()
     {
-        MainMenu.SetActive(false);
-        WinMenu.SetActive(false);
-        LostMenu.SetActive(false);
         ApplicationModel.status = 3;
+		ApplicationModel.score = 0;
         UnityEngine.SceneManagement.SceneManager.LoadScene("SampleScene");
     }
 

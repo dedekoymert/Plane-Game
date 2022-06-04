@@ -14,6 +14,7 @@ public class PlayerStateMachine : MonoBehaviour
 	[HideInInspector]
 	public HighFlyState highFlyState;
 
+	private IEnumerator coroutine;
 
 	private void Awake()
 	{
@@ -29,6 +30,9 @@ public class PlayerStateMachine : MonoBehaviour
 		if (currentState == null)
 			currentState = GetInitialState();
 		currentState.Enter();
+
+		coroutine = time();
+		StartCoroutine(coroutine);
     }
 
     // Update is called once per frame
@@ -36,6 +40,12 @@ public class PlayerStateMachine : MonoBehaviour
     {
 		if (currentState != null)
 			currentState.UpdateLogic();
+		
+		if (ApplicationModel.score == 15) {
+			ApplicationModel.status = 1;
+			ApplicationModel.score = 0;
+			UnityEngine.SceneManagement.SceneManager.LoadScene("SampleScene");
+		}
     }
 
 	void LateUpdate()
@@ -44,6 +54,15 @@ public class PlayerStateMachine : MonoBehaviour
 			currentState.UpdatePhysics();
 	}
 
+	IEnumerator time() {
+    	while (true)
+     	{
+			if(currentState == lowFlyState) {
+         		ApplicationModel.score += 1;
+			}
+         	yield return new WaitForSeconds(1);
+     	}
+ 	}
 
 	public void ChangeState(BaseState newState)
 	{
@@ -63,4 +82,5 @@ public class PlayerStateMachine : MonoBehaviour
 	{
 		return playerController;
 	}
+
 }

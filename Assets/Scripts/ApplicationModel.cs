@@ -5,4 +5,5 @@
     // 2 for lost menu
     // 3 for game
     static public int status = 0; 
+    static public int score = 0;
  }
