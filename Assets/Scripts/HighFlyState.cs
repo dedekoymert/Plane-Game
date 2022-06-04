@@ -10,6 +10,7 @@ public class HighFlyState : BaseState
 	public override void Enter()
 	{
 		base.Enter();
+		playerController.ChangeOriginalPlane();
 	}
 
 	public override void Exit()

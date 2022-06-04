@@ -16,8 +16,10 @@ public class PlayerController : MonoBehaviour
 	// private Rigidbody rb;
     float xThrow, yThrow;
 
+	Color initialColor;
+
 	void Start() {
-		// rb = GetComponent<Rigidbody>();
+		initialColor = GetComponent<Renderer>().material.color;
 	}
 
     void Update()
@@ -63,16 +65,25 @@ public class PlayerController : MonoBehaviour
 	public void ApplySpeedUp() {
 		float zOffset = Time.deltaTime * controlSpeed;
         float rawZPos = transform.localPosition.z + zOffset;
-		transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, rawZPos);
+		if (transform.localPosition.z < 10f) {
+			transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, rawZPos);
+		}
 	}
 
 	public void ApplySlowdown() {
-		float zOffset = Time.deltaTime * controlSpeed;
+		float zOffset = Time.deltaTime * controlSpeed * 1.5f;
 		float rawZPos = transform.localPosition.z - zOffset;
 		if(transform.localPosition.z > 0) {
 			transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, rawZPos);
 		}
 	}
 
+	public void ChangeRedPlane() {
+		GetComponent<Renderer>().material.color = Color.red;
+	}
+
+	public void ChangeOriginalPlane() {
+		GetComponent<Renderer>().material.color = initialColor;
+	}
 	
 }

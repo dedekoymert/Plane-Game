@@ -9,6 +9,7 @@ public class LowFlyState : BaseState
 	public override void Enter()
 	{
 		base.Enter();
+		playerController.ChangeRedPlane();
 	}
 
 	public override void Exit()
