@@ -20,7 +20,7 @@ public class HighFlyState : BaseState
 	public override void UpdateLogic()
 	{
 		base.UpdateLogic();
-		if (playerController.isLow())
+		if (playerController.IsLow())
 		{
 			playerStateMachine.ChangeState(playerStateMachine.lowFlyState);
 		}

@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
-{
+{	
     [SerializeField] float controlSpeed = 10f;
+    [SerializeField] float acceleration = 1f;
     [SerializeField] float xRange = 10f;
     [SerializeField] float yRange = 7f;
 
@@ -13,7 +14,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float positionYawFactor = 2f;
     [SerializeField] float controlRollFactor = -20f;
 
+	// private Rigidbody rb;
     float xThrow, yThrow;
+
+	void Start() {
+		// rb = GetComponent<Rigidbody>();
+	}
 
     void Update()
     {
@@ -51,7 +57,13 @@ public class PlayerController : MonoBehaviour
 		transform.localPosition = new Vector3(clampedXPos, clampedYPos, transform.localPosition.z);
 	}
 
-	public bool isLow() {
+	public bool IsLow() {
 		return transform.localPosition.y < 0;
 	}
+
+	public void SpeedUp() {
+		transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + acceleration);
+	}
+
+	
 }

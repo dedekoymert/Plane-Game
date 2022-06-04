@@ -19,7 +19,7 @@ public class LowFlyState : BaseState
 	public override void UpdateLogic()
 	{
 		base.UpdateLogic();
-		if (!playerController.isLow())
+		if (!playerController.IsLow())
 		{
 			playerStateMachine.ChangeState(playerStateMachine.highFlyState);
 		}
@@ -29,12 +29,7 @@ public class LowFlyState : BaseState
 	{
 		base.UpdatePhysics();
 		playerController.Move();
-		
-		if (Input.GetKey(KeyCode.Space))
-		{
-			// playerStateMachine.ChangeState(playerStateMachine.jumpingState);
-			// playerController.Jump();
-		}
+		playerController.SpeedUp();
 	}
 
 }
