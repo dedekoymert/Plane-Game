@@ -37,15 +37,21 @@ public class PlayerController : MonoBehaviour
     {
         xThrow = Input.GetAxis("Horizontal");
         yThrow = Input.GetAxis("Vertical");
+    }
 
-        float xOffset = xThrow * Time.deltaTime * controlSpeed;
+	public void Move() 
+	{    
+		float xOffset = xThrow * Time.deltaTime * controlSpeed;
         float rawXPos = transform.localPosition.x + xOffset;
         float clampedXPos = Mathf.Clamp(rawXPos, -xRange, xRange);
 
         float yOffset = yThrow * Time.deltaTime * controlSpeed;
         float rawYPos = transform.localPosition.y + yOffset;
-        float clampedYPos = Mathf.Clamp(rawYPos, -yRange, yRange);
+        float clampedYPos = Mathf.Clamp(rawYPos, -yRange, yRange);    
+		transform.localPosition = new Vector3(clampedXPos, clampedYPos, transform.localPosition.z);
+	}
 
-        transform.localPosition = new Vector3(clampedXPos, clampedYPos, transform.localPosition.z);
-    }
+	public bool isLow() {
+		return transform.localPosition.y < 0;
+	}
 }

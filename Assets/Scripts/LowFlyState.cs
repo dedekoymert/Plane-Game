@@ -19,16 +19,16 @@ public class LowFlyState : BaseState
 	public override void UpdateLogic()
 	{
 		base.UpdateLogic();
-		// if (!playerController.IsGrounded())
-		// {
-		// 	// playerStateMachine.ChangeState(playerStateMachine.lo);
-		// }
+		if (!playerController.isLow())
+		{
+			playerStateMachine.ChangeState(playerStateMachine.highFlyState);
+		}
 	}
 
 	public override void UpdatePhysics()
 	{
 		base.UpdatePhysics();
-		// playerController.Move();
+		playerController.Move();
 		
 		if (Input.GetKey(KeyCode.Space))
 		{

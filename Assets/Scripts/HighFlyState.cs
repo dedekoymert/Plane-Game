@@ -20,16 +20,16 @@ public class HighFlyState : BaseState
 	public override void UpdateLogic()
 	{
 		base.UpdateLogic();
-		// if (playerController.IsGrounded() && playerController.GetVerticalVelocity() < 0)
-		// {
-		// 	// playerStateMachine.ChangeState(playerStateMachine.groundedState);
-		// }
+		if (playerController.isLow())
+		{
+			playerStateMachine.ChangeState(playerStateMachine.lowFlyState);
+		}
 	}
 
 	public override void UpdatePhysics()
 	{
 		base.UpdatePhysics();
-		// playerController.Move();
+		playerController.Move();
 		// if (playerController.GetVerticalVelocity() < 0) //falling, so accelerate faster for better gamefeel
 		// {
 		// 	playerController.AddGravity(3f);
