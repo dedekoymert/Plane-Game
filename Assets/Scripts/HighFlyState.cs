@@ -30,6 +30,7 @@ public class HighFlyState : BaseState
 	{
 		base.UpdatePhysics();
 		playerController.Move();
+		playerController.ApplySlowdown();
 		// if (playerController.GetVerticalVelocity() < 0) //falling, so accelerate faster for better gamefeel
 		// {
 		// 	playerController.AddGravity(3f);

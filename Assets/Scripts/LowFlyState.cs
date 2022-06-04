@@ -29,7 +29,7 @@ public class LowFlyState : BaseState
 	{
 		base.UpdatePhysics();
 		playerController.Move();
-		playerController.SpeedUp();
+		playerController.ApplySpeedUp();
 	}
 
 }

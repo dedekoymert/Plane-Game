@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {	
     [SerializeField] float controlSpeed = 10f;
-    [SerializeField] float acceleration = 1f;
     [SerializeField] float xRange = 10f;
     [SerializeField] float yRange = 7f;
 
@@ -58,11 +57,21 @@ public class PlayerController : MonoBehaviour
 	}
 
 	public bool IsLow() {
-		return transform.localPosition.y < 0;
+		return transform.localPosition.y < -1.5f;
 	}
 
-	public void SpeedUp() {
-		transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + acceleration);
+	public void ApplySpeedUp() {
+		float zOffset = Time.deltaTime * controlSpeed;
+        float rawZPos = transform.localPosition.z + zOffset;
+		transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, rawZPos);
+	}
+
+	public void ApplySlowdown() {
+		float zOffset = Time.deltaTime * controlSpeed;
+		float rawZPos = transform.localPosition.z - zOffset;
+		if(transform.localPosition.z > 0) {
+			transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, rawZPos);
+		}
 	}
 
 	
